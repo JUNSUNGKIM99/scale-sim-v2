@@ -1,6 +1,6 @@
 import argparse
 
-from scalesim.scale_sim import scalesim
+from scale_sim import scalesim
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
