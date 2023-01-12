@@ -1,6 +1,29 @@
 import argparse
+import numpy as np 
+import matplotlib.pyplot as plt 
 
+from scalesim.utilities.scalesim_report import ScalesimReport as reporter
 from scale_sim import scalesim
+
+
+def plot_stacked_bar(x, y_series_np, legends, title, y_axis_label=''):
+    num_plots = y_series_np.shape[0]
+    plt.bar(x, y_series_np[0], label=legends[0])
+    bottom = y_series_np[0]
+    for plt_id in range(1, num_plots):
+        plt.bar(x, y_series_np[plt_id], bottom=bottom,label=legends[plt_id])
+        bottom += y_series_np[plt_id]
+
+    plt.ylabel(y_axis_label)
+    plt.title(title)
+    plt.xticks(rotation=80)
+    plt.legend()
+
+    plt.show()
+
+def compare_dataflow():
+    pass
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
