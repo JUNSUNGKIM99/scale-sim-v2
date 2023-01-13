@@ -2,7 +2,7 @@ import configparser as cp
 import os
 import sys
 
-from scalesim.memory_map import memory_map
+from memory_map import memory_map
 
 
 class scale_config:

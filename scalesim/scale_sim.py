@@ -1,7 +1,10 @@
 import os
-from scalesim.scale_config import scale_config
+import inspect
+#from scalesim.scale_config import scale_config
+from scale_config import scale_config
+from simulator import simulator as sim
 from topology_utils import topologies
-from scalesim.simulator import simulator as sim
+#from scalesim.simulator import simulator as sim
 
 
 class scalesim:
@@ -10,7 +13,8 @@ class scalesim:
                  verbose=True,
                  config='',
                  topology='',
-                 input_type_gemm=False):
+                 input_type_gemm=False,
+                 layer_fusion=False):
 
         # Data structures
         self.config = scale_config()
@@ -30,6 +34,8 @@ class scalesim:
         self.verbose_flag = verbose
         self.run_done_flag = False
         self.logs_generated_flag = False
+        # Fusion Flags
+        self.fusion_flag = layer_fusion
 
         self.set_params(config_filename=config, topology_filename=topology)
 
@@ -46,7 +52,7 @@ class scalesim:
                 exit()
             else:
                 self.topology_file = topology_filename
-
+        # Second, check if the user provided a valid config file
         if not os.path.exists(config_filename):
             print("ERROR: scalesim.scale.py: Config file not found") 
             print("Input file:" + config_filename)
@@ -54,6 +60,9 @@ class scalesim:
             exit()
         else: 
             self.config_file = config_filename
+        # Third, checi if the user provided a valid fusion file
+        # To do: 
+        #Implement validate the user fusion file 
 
         # Parse config first
         self.config.read_conf_file(self.config_file)
@@ -71,7 +80,7 @@ class scalesim:
         #num_layers = self.topo.get_num_layers()
         #self.config.scale_memory_maps(num_layers=num_layers)
 
-    #
+    # Top_path is output directory
     def run_scale(self, top_path='.'):
 
         self.top_path = top_path
@@ -120,11 +129,11 @@ class scalesim:
             df_string = "Weight Stationary"
         elif df == 'is':
             df_string = "Input Stationary"
-
+        print(inspect.getfile(sim))
         print("====================================================")
         print("******************* SCALE SIM **********************")
         print("====================================================")
-
+        print("The number of the layer provided: ", self.runner.num_layers)
         arr_h, arr_w = self.config.get_array_dims()
         print("Array Size: \t" + str(arr_h) + "x" + str(arr_w))
 

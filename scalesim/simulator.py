@@ -1,8 +1,8 @@
 import os
 
-from scalesim.scale_config import scale_config as cfg
-from scalesim.topology_utils import topologies as topo
-from scalesim.single_layer_sim import single_layer_sim as layer_sim
+from scale_config import scale_config as cfg
+from topology_utils import topologies as topo
+from single_layer_sim import single_layer_sim as layer_sim
 
 
 class simulator:
@@ -39,14 +39,14 @@ class simulator:
 
         # Calculate inferrable parameters here
         self.num_layers = self.topo.get_num_layers()
-
+        
         self.params_set_flag = True
 
     #
     def run(self):
         assert self.params_set_flag, 'Simulator parameters are not set'
-
         # 1. Create the layer runners for each layer
+        print("The number of layers: ", self.num_layers)
         for i in range(self.num_layers):
             this_layer_sim = layer_sim()
             this_layer_sim.set_params(layer_id=i,
