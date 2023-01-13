@@ -3,10 +3,10 @@ import os
 from scale_config import scale_config as cfg
 from topology_utils import topologies as topo
 from compute.operand_matrix import operand_matrix as opmat
-from scalesim.compute.systolic_compute_os import systolic_compute_os
-from scalesim.compute.systolic_compute_ws import systolic_compute_ws
-from scalesim.compute.systolic_compute_is import systolic_compute_is
-from scalesim.memory.double_buffered_scratchpad_mem import double_buffered_scratchpad as mem_dbsp
+from compute.systolic_compute_os import systolic_compute_os
+from compute.systolic_compute_ws import systolic_compute_ws
+from compute.systolic_compute_is import systolic_compute_is
+from memory.double_buffered_scratchpad_mem import double_buffered_scratchpad as mem_dbsp
 
 
 class single_layer_sim:

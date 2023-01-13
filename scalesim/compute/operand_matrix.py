@@ -2,8 +2,8 @@ import math
 import numpy as np
 from tqdm import tqdm
 
-from scalesim.topology_utils import topologies as topoutil
-from scalesim.scale_config import scale_config as cfg
+from topology_utils import topologies as topoutil
+from scale_config import scale_config as cfg
 
 
 # This class defines data types for operand matrices

@@ -1,7 +1,7 @@
 import math
 import numpy as np
 
-from scalesim.memory.read_port import read_port
+from memory.read_port import read_port
 
 
 class ReadBufferEstimateBw:

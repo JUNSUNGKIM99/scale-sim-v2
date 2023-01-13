@@ -3,7 +3,7 @@
 import math
 import numpy as np
 from tqdm import tqdm
-from scalesim.memory.write_port import write_port
+from memory.write_port import write_port
 
 
 class write_buffer:

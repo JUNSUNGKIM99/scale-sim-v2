@@ -1,7 +1,7 @@
 import math
 import numpy as np
 from tqdm import tqdm
-from scalesim.scale_config import scale_config as cfg
+from scale_config import scale_config as cfg
 
 
 class systolic_compute_is:
