@@ -1,10 +1,8 @@
 import os
 import inspect
-#from scalesim.scale_config import scale_config
 from scale_config import scale_config
 from simulator import simulator as sim
 from topology_utils import topologies
-#from scalesim.simulator import simulator as sim
 
 
 class scalesim:
@@ -16,7 +14,7 @@ class scalesim:
                  input_type_gemm=False,
                  layer_fusion=False):
 
-        # Data structures
+        # Data structures, Object initiate 
         self.config = scale_config()
         self.topo = topologies()
 
@@ -62,7 +60,7 @@ class scalesim:
             self.config_file = config_filename
         # Third, checi if the user provided a valid fusion file
         # To do: 
-        #Implement validate the user fusion file 
+        #Implement validate the user fusion file, and parse this file
 
         # Parse config first
         self.config.read_conf_file(self.config_file)
@@ -110,8 +108,11 @@ class scalesim:
         #    top_path=self.top_path,
         #    save_trace=save_trace,
         #    verbosity=self.verbose_flag
-        #)
-        self.runner.run()
+        #
+        if self.fusion_flag == True:
+            self.runner.fusion_run()
+        else:
+            self.runner.run()
         self.run_done_flag = True
 
         #self.runner.generate_all_logs()
@@ -130,6 +131,7 @@ class scalesim:
         elif df == 'is':
             df_string = "Input Stationary"
         print(inspect.getfile(sim))
+
         print("====================================================")
         print("******************* SCALE SIM **********************")
         print("====================================================")

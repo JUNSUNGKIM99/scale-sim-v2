@@ -1,9 +1,9 @@
 import os
-
+import inspect
 from scale_config import scale_config as cfg
 from topology_utils import topologies as topo
 from single_layer_sim import single_layer_sim as layer_sim
-
+from fusion_layer_sim import fusion_layer_sim as fusion_sim
 
 class simulator:
     def __init__(self):
@@ -17,10 +17,12 @@ class simulator:
         self.num_layers = 0
 
         self.single_layer_sim_object_list = []
-
+        #fusion sim object 
+        self.fusion_layer_sim_object_list = []
+        
+        self.fusion_flag = False
         self.params_set_flag = False
         self.all_layer_run_done = False
-
     #
     def set_params(self,
                    config_obj=cfg(),
@@ -36,17 +38,45 @@ class simulator:
         self.top_path = top_path
         self.verbose = verbosity
         self.save_trace = save_trace
-
         # Calculate inferrable parameters here
         self.num_layers = self.topo.get_num_layers()
-        
         self.params_set_flag = True
+
+    #
+    def fusion_run(self):
+        pass
+        assert self.params_set_flag, 'Simulator parameters are not set'
+        # 1. Create the layer runners for each layer
+        print("The number of layers: ", self.num_layers)
+        # To Do Implement Fusion layer sim 
+        for i in range(self.num_layers):
+            this_layer_sim = fusion_sim()
+            this_layer_sim.set_params(layer_id=i,
+                                 config_obj=self.conf,
+                                 topology_obj=self.topo,
+                                 verbose=self.verbose)
+
+            self.fusion_layer_sim_object_list.append(this_layer_sim) 
+            #print("test",self.fusion_layer_sim_object_list[1].topo.layers_calculated_hyperparams[-1])
+        if not os.path.isdir(self.top_path):
+            cmd = 'mkdir ' + self.top_path
+            os.system(cmd)
+
+        report_path = self.top_path + '/' + self.conf.get_run_name()
+
+        if not os.path.isdir(report_path):
+            cmd = 'mkdir ' + report_path
+            os.system(cmd)
+
+        self.top_path = report_path
+        #2. Implement fusion_run
 
     #
     def run(self):
         assert self.params_set_flag, 'Simulator parameters are not set'
         # 1. Create the layer runners for each layer
         print("The number of layers: ", self.num_layers)
+            # Single layer Sim 
         for i in range(self.num_layers):
             this_layer_sim = layer_sim()
             this_layer_sim.set_params(layer_id=i,
@@ -55,7 +85,7 @@ class simulator:
                                  verbose=self.verbose)
 
             self.single_layer_sim_object_list.append(this_layer_sim)
-
+                
         if not os.path.isdir(self.top_path):
             cmd = 'mkdir ' + self.top_path
             os.system(cmd)
@@ -75,9 +105,8 @@ class simulator:
             if self.verbose:
                 layer_id = single_layer_obj.get_layer_id()
                 print('\nRunning Layer ' + str(layer_id))
-
+            
             single_layer_obj.run()
-
             if self.verbose:
                 comp_items = single_layer_obj.get_compute_report_items()
                 comp_cycles = comp_items[0]

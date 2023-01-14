@@ -111,7 +111,7 @@ class single_layer_sim:
         _, ifmap_op_mat = self.op_mat_obj.get_ifmap_matrix()
         _, filter_op_mat = self.op_mat_obj.get_filter_matrix()
         _, ofmap_op_mat = self.op_mat_obj.get_ofmap_matrix()
-
+        #print(self.topo.get_layer_ofmap_dims(self.layer_id))
         self.num_compute = self.topo.get_layer_num_ofmap_px(self.layer_id) \
                            * self.topo.get_layer_window_size(self.layer_id)
 
