@@ -110,6 +110,7 @@ class scalesim:
         #    verbosity=self.verbose_flag
         #
         if self.fusion_flag == True:
+            # Run Fusion sim
             self.runner.fusion_run()
         else:
             self.runner.run()
