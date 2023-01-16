@@ -31,6 +31,7 @@ if __name__ == '__main__':
     logpath = args.p
     inp_type = args.i
     trace_flag = args.save_trace
+    fusion_flag = False
     
     if trace_flag == 'True':
         trace_flag = True

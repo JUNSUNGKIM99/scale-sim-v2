@@ -104,14 +104,16 @@ class single_layer_sim:
 
     def run(self):
         assert self.params_set_flag, 'Parameters are not set. Run set_params()'
-
+        #Debug: print(self.op_mat_obj.ifmap_addr_matrix.shape)
+        #print(self.topo.get_layer_ofmap_dims(0))
         # 1. Setup and the get the demand from compute system
 
+        
         # 1.1 Get the operand matrices
         _, ifmap_op_mat = self.op_mat_obj.get_ifmap_matrix()
         _, filter_op_mat = self.op_mat_obj.get_filter_matrix()
         _, ofmap_op_mat = self.op_mat_obj.get_ofmap_matrix()
-        #print(self.topo.get_layer_ofmap_dims(self.layer_id))
+
         self.num_compute = self.topo.get_layer_num_ofmap_px(self.layer_id) \
                            * self.topo.get_layer_window_size(self.layer_id)
 

@@ -324,7 +324,15 @@ class topologies(object):
             self.topo_calc_hyperparams()
         layer_calc_params = self.layers_calculated_hyperparams[layer_id]
         return layer_calc_params[3]
-
+    
+    def get_layer_window_volume(self, layer_id=0):
+        if not (self.topo_load_flag or self.num_layers - 1 < layer_id):
+            print("ERROR: topologies.get_layer_num_filter: Invalid layer id")
+        if not self.topo_calc_hyper_param_flag:
+            self.topo_calc_hyperparams()
+        layer_params = self.topo_arrays[layer_id]
+        return layer_params[3] * layer_params[4] * layer_params[5] * layer_params[6]
+        
     def get_layer_num_ofmap_px(self, layer_id=0):
         if not (self.topo_load_flag or self.num_layers - 1 < layer_id):
             print("ERROR: topologies.get_layer_num_filter: Invalid layer id")

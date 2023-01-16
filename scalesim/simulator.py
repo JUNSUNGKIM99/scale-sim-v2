@@ -31,7 +31,7 @@ class simulator:
                    verbosity=True,
                    save_trace=True
                    ):
-
+        # Assign topo, config parsed object (all info. inclueded)
         self.conf = config_obj
         self.topo = topo_obj
 

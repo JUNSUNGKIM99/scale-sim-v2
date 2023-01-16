@@ -543,8 +543,3 @@ class double_buffered_scratchpad:
     #
     def print_ofmap_dram_trace(self, filename):
         self.ofmap_buf.print_trace(filename)
-
-
-
-
-

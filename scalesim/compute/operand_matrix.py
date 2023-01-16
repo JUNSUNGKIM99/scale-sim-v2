@@ -59,7 +59,7 @@ class operand_matrix(object):
         #    message = err_prefix + 'Invalid arguments. Exiting.'
         #    print(message)
         #    return -1
-
+        #    Assign the layer info.
         self.ifmap_rows, self.ifmap_cols = self.topoutil.get_layer_ifmap_dims(self.layer_id)
         self.filter_rows, self.filter_cols = self.topoutil.get_layer_filter_dims(self.layer_id)
         self.num_input_channels = self.topoutil.get_layer_num_channels(self.layer_id)
@@ -84,6 +84,7 @@ class operand_matrix(object):
         self.ofmap_rows = int(self.ofmap_rows)
         self.ofmap_cols = int(self.ofmap_cols)
         self.ofmap_px_per_filt = int(self.ofmap_rows * self.ofmap_cols)
+        self.ifmap_px_per_ofmap = int(self.ifmap_rows * self.ifmap_cols * self.num_input_channels)
         self.conv_window_size = int(self.topoutil.get_layer_window_size(self.layer_id))
 
         # Assign the offsets
