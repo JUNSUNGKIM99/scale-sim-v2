@@ -61,7 +61,7 @@ class systolic_compute_ws:
 
         ifmap_col = self.ifmap_op_mat.shape[1]
         filter_row= self.filter_op_mat.shape[0]
-
+        print("DEBUG: tets",ifmap_col, filter_row)
         assert ifmap_col == filter_row, "Dimension mismatch between operands"
 
         self.Sr = self.ifmap_op_mat.shape[1]

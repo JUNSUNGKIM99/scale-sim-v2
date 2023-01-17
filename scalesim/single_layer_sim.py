@@ -81,7 +81,7 @@ class single_layer_sim:
                                    config_obj=self.config,
                                    topoutil_obj=self.topo,
                                    )
-
+        print(self.op_mat_obj.conv_window_size)
         self.dataflow = self.config.get_dataflow()
         if self.dataflow == 'os':
             self.compute_system = systolic_compute_os()
@@ -114,6 +114,7 @@ class single_layer_sim:
         _, filter_op_mat = self.op_mat_obj.get_filter_matrix()
         _, ofmap_op_mat = self.op_mat_obj.get_ofmap_matrix()
 
+        print('DEBUG: op_mat i w o',ifmap_op_mat.shape, filter_op_mat.shape, ofmap_op_mat.shape)
         self.num_compute = self.topo.get_layer_num_ofmap_px(self.layer_id) \
                            * self.topo.get_layer_window_size(self.layer_id)
 
@@ -127,6 +128,8 @@ class single_layer_sim:
         ifmap_prefetch_mat, filter_prefetch_mat = self.compute_system.get_prefetch_matrices()
         ifmap_demand_mat, filter_demand_mat, ofmap_demand_mat = self.compute_system.get_demand_matrices()
         #print('DEBUG: Compute operations done')
+        print("DEBUG: prefetch i w, demand i w o", ifmap_prefetch_mat.shape, filter_prefetch_mat.shape, ifmap_demand_mat.shape, filter_demand_mat.shape, ofmap_demand_mat.shape)
+        print()
         # 2. Setup the memory system and run the demands through it to find any memory bottleneck and generate traces
 
         # 2.1 Setup the memory system if it was not setup externally

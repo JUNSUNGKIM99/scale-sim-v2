@@ -93,6 +93,7 @@ class operand_matrix(object):
 
         # Address matrices: This is needed to take into account the updated dimensions
         self.ifmap_addr_matrix = np.ones((self.ofmap_px_per_filt * self.batch_size, self.conv_window_size), dtype='>i4')
+        #self.ifmap_addr_matrix = np.ones((self.ifmap_px_per_ofmap * self.batch_size, self.conv_window_size), dtype='>i4')
         self.filter_addr_matrix = np.ones((self.conv_window_size, self.num_filters), dtype='>i4')
         self.ofmap_addr_matrix = np.ones((self.ofmap_px_per_filt, self.num_filters), dtype='>i4')
         self.params_set_flag = True
