@@ -14,7 +14,7 @@ class double_buffered_scratchpad:
         self.ifmap_buf = rdbuf()
         self.filter_buf = rdbuf()
         self.ofmap_buf =wrbuf()
-
+        
         self.ifmap_port = rdport()
         self.filter_port = rdport()
         self.ofmap_port = wrport()
@@ -65,7 +65,8 @@ class double_buffered_scratchpad:
                    ifmap_backing_buf_bw=1, filter_backing_buf_bw=1, ofmap_backing_buf_bw=1):
 
         self.estimate_bandwidth_mode = estimate_bandwidth_mode
-
+        #
+        print(self.estimate_bandwidth_mode)
         if self.estimate_bandwidth_mode:
             self.ifmap_buf = rdbuf_est()
             self.filter_buf = rdbuf_est()

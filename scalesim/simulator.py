@@ -69,13 +69,13 @@ class simulator:
             os.system(cmd)
 
         self.top_path = report_path
-        #2. Implement fusion_run
+        #2. TODO: Implement fusion_run
 
     #
     def run(self):
         assert self.params_set_flag, 'Simulator parameters are not set'
         # 1. Create the layer runners for each layer
-        print("The number of layers: ", self.num_layers)
+        #DEBUG print("The number of layers: ", self.num_layers)
             # Single layer Sim 
         for i in range(self.num_layers):
             this_layer_sim = layer_sim()

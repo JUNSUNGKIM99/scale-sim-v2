@@ -61,7 +61,7 @@ class systolic_compute_ws:
 
         ifmap_col = self.ifmap_op_mat.shape[1]
         filter_row= self.filter_op_mat.shape[0]
-        print("DEBUG: tets",ifmap_col, filter_row)
+
         assert ifmap_col == filter_row, "Dimension mismatch between operands"
 
         self.Sr = self.ifmap_op_mat.shape[1]
@@ -69,7 +69,7 @@ class systolic_compute_ws:
         self.T = self.ifmap_op_mat.shape[0]
 
         self.arr_row, self.arr_col = self.config.get_array_dims()
-
+        # Determine Chunk Size
         self.row_fold = math.ceil(self.Sr / self.arr_row)
         self.col_fold = math.ceil(self.Sc / self.arr_col)
 
