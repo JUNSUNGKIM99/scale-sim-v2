@@ -93,7 +93,6 @@ class operand_matrix(object):
 
         # Address matrices: This is needed to take into account the updated dimensions
         self.ifmap_addr_matrix = np.ones((self.ofmap_px_per_filt * self.batch_size, self.conv_window_size), dtype='>i4')
-        #self.ifmap_addr_matrix = np.ones((self.ifmap_px_per_ofmap * self.batch_size, self.conv_window_size), dtype='>i4')
         self.filter_addr_matrix = np.ones((self.conv_window_size, self.num_filters), dtype='>i4')
         self.ofmap_addr_matrix = np.ones((self.ofmap_px_per_filt, self.num_filters), dtype='>i4')
         self.params_set_flag = True
@@ -230,9 +229,9 @@ class operand_matrix(object):
     def get_ifmap_matrix_part(self, start_row=0, num_rows=-1, start_col=0,
                               num_cols=-1):
         if num_rows == -1:
-            num_rows = self.ofmap_px_per_filt
+            num_rows = self.ofmap_px_per_filt #576
         if num_cols == -1:
-            num_cols = self.conv_window_size
+            num_cols = self.conv_window_size #27
         my_name = 'operand_matrix.get_ifmap_matrix_part(): '
         err_prefix = 'Error: ' + my_name
         if not self.matrices_ready_flag:
@@ -243,6 +242,7 @@ class operand_matrix(object):
                 print(message)
                 return -1, np.zeros((1, 1))
         if (start_row + num_rows) > self.ofmap_px_per_filt or (start_col + num_cols) > self.conv_window_size:
+            # 0 + 576 > 576 or 0 + 27 > 27 >> Illegal arguments Exiting
             message = err_prefix + ": Illegal arguments. Exiting!"
             print(message)
             return -2, np.zeros((1, 1))
@@ -251,8 +251,8 @@ class operand_matrix(object):
         #end_row = start_row + num_rows + 1
         #end_col = start_col + num_cols + 1
         #ret_mat = self.ifmap_addr_matrix[start_row: end_row][start_col: end_col]
-        end_row = start_row + num_rows
-        end_col = start_col + num_cols
+        end_row = start_row + num_rows # 0 + 576
+        end_col = start_col + num_cols # 0 + 27
         ret_mat = self.ifmap_addr_matrix[start_row: end_row, start_col: end_col]
         return 0, ret_mat
 
@@ -264,9 +264,9 @@ class operand_matrix(object):
                                num_cols=-1):
 
         if num_rows == -1:
-            num_rows = self.conv_window_size
+            num_rows = self.conv_window_size # 27 
         if num_cols == -1:
-            num_cols = self.num_filters
+            num_cols = self.num_filters # 3
         my_name = 'operand_matrix.get_filter_matrix_part(): '
         err_prefix = 'Error: ' + my_name
         if not self.matrices_ready_flag:
@@ -277,6 +277,7 @@ class operand_matrix(object):
                 print(message)
                 return -1, np.zeros((1, 1))
         if (start_row + num_rows) > self.conv_window_size or (start_col + num_cols) > self.num_filters:
+            # 0 + 27 > 27 or 0 + 3 > 3
             message = err_prefix + ": Illegal arguments. Exiting!"
             print(message)
             return -2, np.zeros((1, 1))
@@ -284,8 +285,8 @@ class operand_matrix(object):
         # Anand: ISSUE #3. FIX
         #end_row = start_row + num_rows + 1
         #end_col = start_col + num_cols + 1
-        end_row = start_row + num_rows
-        end_col = start_col + num_cols
+        end_row = start_row + num_rows # 0 + 27
+        end_col = start_col + num_cols # 0 + 3
 
         # Anand: ISSUE #3. FIX
         #ret_mat = self.filter_addr_matrix[start_row: end_row][start_col: end_col]

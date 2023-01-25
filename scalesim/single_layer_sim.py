@@ -159,7 +159,8 @@ class single_layer_sim:
                 # The number 10 elems per cycle is arbitrary
                 ifmap_backing_bw = 10
                 filter_backing_bw = 10
-                ofmap_backing_bw = arr_col
+                #ofmap_backing_bw = arr_col
+                ofmap_backing_bw = 10
 
             self.memory_system.set_params(
                     word_size=word_size,
